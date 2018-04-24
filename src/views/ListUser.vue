@@ -45,9 +45,9 @@ export default {
       UserService.remove(user).then(res => {
         this.users = this.users.filter( u => u.id !== user.id );
 
-        alert(res.message)
+        this.$toast(res.message)
       }).catch(err => {
-        alert(err.message)
+        this.$toast(err.message)
       })
     }
   },

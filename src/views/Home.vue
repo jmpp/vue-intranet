@@ -51,9 +51,9 @@ export default {
         this.users = this.users.filter(u => u.id !== user.id); // Suppression de l'utilisateur dans le tableau 'this.users'
         this.getRandomUser();
 
-        alert(res.message)
+        this.$toast(res.message)
       }).catch(err => {
-        alert(err.message);
+        this.$toast(err.message);
       });
     }
   },

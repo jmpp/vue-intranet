@@ -29,11 +29,11 @@ export default {
     editUser(userObjectModified) {
       UserService.update(userObjectModified)
         .then( res => {
-          alert(res.message)
+          this.$toast(res.message)
 
           this.$router.replace({ name : 'list' }) // Redirection vers la liste <ListUser>
         }).catch(err => {
-          alert(err.message)
+          this.$toast(err.message)
         })
     }
   },
@@ -42,7 +42,7 @@ export default {
     UserService.fetchOne(this.$route.params.id).then(user => {
       this.user = user
     }).catch(err => {
-      alert(err.message)
+      this.$toast(err.message)
       this.$router.replace({ name : 'home' })
     })
   }

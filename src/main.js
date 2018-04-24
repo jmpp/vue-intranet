@@ -3,9 +3,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuelidate from 'vuelidate'
+import Toast from 'vue-easy-toast'
 
 Vue.use(VueRouter)
 Vue.use(Vuelidate)
+Vue.use(Toast)
 
 import router from './router.js'
 

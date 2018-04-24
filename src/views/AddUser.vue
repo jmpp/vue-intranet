@@ -21,11 +21,11 @@ export default {
   methods : {
     addUser(newUserObject) {
       UserService.create(newUserObject).then( res => {
-        alert(res.message)
+        this.$toast(res.message)
 
         this.$router.replace({ name : 'list' }) // Redirection vers la page <ListUser>
       }).catch(err => {
-        alert(err.message)
+        this.$toast(err.message)
       })
     }
   }
