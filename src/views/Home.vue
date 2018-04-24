@@ -9,7 +9,7 @@
     <UserCard :user="user" v-if="user" />
 
     <div class="actions">
-      <a href="#" class="btn">
+      <a href="#" class="btn" @click.prevent="getRandomUser">
         <i class="fa fa-random" /> Dire bonjour à quelqu'un d'autre
       </a>
     </div>
@@ -33,11 +33,25 @@ export default {
     }
   },
 
+  methods: {
+    // Prend un utilisateur au hasard dans le tableau 'users'
+    getRandomUser() {
+      let randIndex;
+
+      // Petite technique pour s'assurer que le prochain utilisateur tiré au hasard ne soit pas le même que celui actuel
+      do {
+        randIndex = Math.floor(Math.random() * this.users.length)
+      } while (randIndex === this.users.indexOf(this.user) && this.users.length > 1);
+
+      this.user = this.users[randIndex];
+    }
+  },
+
   created() {
     // A la création de <Home> , on lance une requête Ajax vers le serveur, grâce à la librairie `axios`
     axios.get('http://localhost:9000/collaborateurs').then( response => {
       this.users = response.data; // Lorsqu'on obtient la réponse JSON du serveur, on remplit notre tableau `users` défini dans les data
-      this.user = this.users[Math.floor(Math.random() * this.users.length)]; // Prend un utilisateur au hasard dans le tableau `users`
+      this.getRandomUser(); // Prend un utilisateur au hasard dans le tableau `users`
     })
   }
 }
