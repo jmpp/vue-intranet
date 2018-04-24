@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <div class="container">
-      <a href="#" class="active">Accueil</a>
+      <router-link to="/">Accueil</router-link>
       <a href="#">Liste des collaborateurs</a>
       <a href="#">Ajouter un collaborateur</a>
     </div>
@@ -39,7 +39,7 @@ export default {
       background-color: #128953;
       transform: scale(1.05);
     }
-    .navbar a.active {
+    .navbar a.router-link-exact-active {
       background-color: #128953;
     }
     .navbar a:active {
