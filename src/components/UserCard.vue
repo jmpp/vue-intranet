@@ -11,7 +11,7 @@
         <i class="fa fa-calendar" /> {{user.birthdate | dateFr}} ({{user.birthdate | age}} ans)<br>
         <i class="fa fa-map-marker" /> {{user.city}}, {{user.country}}
       </p>
-      <a href="#" class="btn btn-small" >Supprimer</a>
+      <a href="#" class="btn btn-small" @click.prevent="remove">Supprimer</a>
       <a href="#" class="btn btn-small" >Modifier</a>
     </div>
   </article>
@@ -33,7 +33,13 @@ export default {
     fullname : function() {
       return this.user.firstname[0].toUpperCase() + this.user.firstname.slice(1).toLowerCase() + ' ' + this.user.lastname.toUpperCase();
     }
-  }
+  },
+
+  methods : {
+    remove() {
+      this.$emit('remove', this.user);
+    }
+  },
 }
 </script>
 

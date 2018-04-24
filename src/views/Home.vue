@@ -6,7 +6,7 @@
     <hr>
     <h3>Avez-vous dit bonjour aujourd'hui à ...</h3>
 
-    <UserCard :user="user" v-if="user" />
+    <UserCard :user="user" v-if="user" @remove="removeUser" />
 
     <div class="actions">
       <a href="#" class="btn" @click.prevent="getRandomUser">
@@ -44,6 +44,14 @@ export default {
       } while (randIndex === this.users.indexOf(this.user) && this.users.length > 1);
 
       this.user = this.users[randIndex];
+    },
+
+    removeUser(user) {
+      axios.delete('http://localhost:9000/collaborateur/' + user.id).then(response => {
+        this.users = this.users.filter(u => u.id !== user.id); // Suppression de l'utilisateur dans le tableau 'this.users'
+
+        this.getRandomUser();
+      })
     }
   },
 

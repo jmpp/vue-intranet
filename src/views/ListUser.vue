@@ -15,7 +15,7 @@
     </form>
 
     <div class="userlist">
-      <UserCard v-for="user in filteredUsers" :user="user" :key="user.id" />
+      <UserCard v-for="user in filteredUsers" :user="user" :key="user.id" @remove="removeUser" />
     </div>
 
   </div>
@@ -37,6 +37,14 @@ export default {
       users : [],
       searchText : '',
       filterBy : 'name'
+    }
+  },
+
+  methods : {
+    removeUser(user) {
+      axios.delete('http://localhost:9000/collaborateur/' + user.id).then(response => {
+        this.users = this.users.filter( u => u.id !== user.id );
+      })
     }
   },
 
