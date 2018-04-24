@@ -1,14 +1,14 @@
 <template>
   <article class="user-card">
     <figure>
-      <img :src="user.photo" :alt="user.firstname + user.lastname">
+      <img :src="photo" :alt="fullname">
     </figure>
     <div>
-      <h1>{{user.firstname}} {{user.lastname}}</h1>
+      <h1>{{fullname}}</h1>
       <p>
-        <i class="fa fa-envelope" /> <a :href="'mailto:'+user.email" :title="'Envoyer un email à '+user.firstname +' '+ user.lastname+' ('+user.email+')'">{{user.email}}</a><br>
-        <i class="fa fa-phone" /> <a :href="'tel:'+user.phone" :title="'Téléphoner à '+user.firstname +' '+ user.lastname+' ('+user.phone+')'">{{user.phone}}</a><br>
-        <i class="fa fa-calendar" /> {{user.birthdate }} (XX ans)<br>
+        <i class="fa fa-envelope" /> <a :href="'mailto:'+user.email" :title="'Envoyer un email à '+fullname+' ('+user.email+')'">{{user.email}}</a><br>
+        <i class="fa fa-phone" /> <a :href="'tel:'+user.phone" :title="'Téléphoner à '+fullname+' ('+user.phone+')'">{{user.phone}}</a><br>
+        <i class="fa fa-calendar" /> {{user.birthdate}} (XX ans)<br>
         <i class="fa fa-map-marker" /> {{user.city}}, {{user.country}}
       </p>
       <a href="#" class="btn btn-small" >Supprimer</a>
@@ -24,6 +24,15 @@ export default {
   // Décrit que ce composant doit impérativement implémenter une prop nomée 'user', et qui doit être un objet
   props : {
     user : { type: Object, required: true }
+  },
+
+  computed : {
+    photo : function() {
+      return this.user.photo || 'https://s1.qwant.com/thumbr/0x0/2/2/6788a08a24aefe72817478982ee2e6/b_1_q_0_p_0.jpg?u=http%3A%2F%2Fgurucul.com%2Fwp-content%2Fuploads%2F2015%2F01%2Fdefault-user-icon-profile.png&q=0&b=1&p=0&a=1'
+    },
+    fullname : function() {
+      return this.user.firstname[0].toUpperCase() + this.user.firstname.slice(1).toLowerCase() + ' ' + this.user.lastname.toUpperCase();
+    }
   }
 }
 </script>
@@ -50,6 +59,7 @@ export default {
     .user-card > figure > img {
       display: block;
       border-radius: 300px;
+      max-width: 128px;
     }
 
   .user-card > div {
