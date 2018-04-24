@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="container">
       <router-link to="/">Accueil</router-link>
-      <a href="#">Liste des collaborateurs</a>
+      <router-link to="/list">Liste des collaborateurs</router-link>
       <a href="#">Ajouter un collaborateur</a>
     </div>
   </nav>
