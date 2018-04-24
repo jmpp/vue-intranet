@@ -3,8 +3,13 @@
 import Vue from 'vue'
 
 import App from './App'
+import { age, dateFr, trim } from './filters/globalFilters.js'
 
 Vue.config.productionTip = false
+
+Vue.filter('age', age)
+Vue.filter('dateFr', dateFr)
+Vue.filter('trim', trim)
 
 /* eslint-disable no-new */
 new Vue({

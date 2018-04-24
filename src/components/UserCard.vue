@@ -6,9 +6,9 @@
     <div>
       <h1>{{fullname}}</h1>
       <p>
-        <i class="fa fa-envelope" /> <a :href="'mailto:'+user.email" :title="'Envoyer un email à '+fullname+' ('+user.email+')'">{{user.email}}</a><br>
+        <i class="fa fa-envelope" /> <a :href="'mailto:'+user.email" :title="'Envoyer un email à '+fullname+' ('+user.email+')'">{{user.email | trim(25) }}</a><br>
         <i class="fa fa-phone" /> <a :href="'tel:'+user.phone" :title="'Téléphoner à '+fullname+' ('+user.phone+')'">{{user.phone}}</a><br>
-        <i class="fa fa-calendar" /> {{user.birthdate}} (XX ans)<br>
+        <i class="fa fa-calendar" /> {{user.birthdate | dateFr}} ({{user.birthdate | age}} ans)<br>
         <i class="fa fa-map-marker" /> {{user.city}}, {{user.country}}
       </p>
       <a href="#" class="btn btn-small" >Supprimer</a>
