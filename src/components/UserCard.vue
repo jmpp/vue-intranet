@@ -12,7 +12,7 @@
         <i class="fa fa-map-marker" /> {{user.city}}, {{user.country}}
       </p>
       <a href="#" class="btn btn-small" @click.prevent="remove">Supprimer</a>
-      <a href="#" class="btn btn-small" >Modifier</a>
+      <router-link :to="{ name: 'edit', params : { id:user.id } }" class="btn btn-small">Modifier</router-link>
     </div>
   </article>
 </template>
