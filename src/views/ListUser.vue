@@ -23,7 +23,7 @@
 
 <script>
 import UserCard from '@/components/UserCard'
-import axios from 'axios'
+import UserService from '@/services/UserService'
 
 export default {
   name: 'ListUser',
@@ -42,8 +42,12 @@ export default {
 
   methods : {
     removeUser(user) {
-      axios.delete('http://localhost:9000/collaborateur/' + user.id).then(response => {
+      UserService.remove(user).then(res => {
         this.users = this.users.filter( u => u.id !== user.id );
+
+        alert(res.message)
+      }).catch(err => {
+        alert(err.message)
       })
     }
   },
@@ -55,8 +59,8 @@ export default {
   },
 
   created() {
-    axios.get('http://localhost:9000/collaborateurs').then(response => {
-      this.users = response.data;
+    UserService.fetchAll().then(collaborateurs => {
+      this.users = collaborateurs;
     })
   }
 }

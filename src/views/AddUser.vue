@@ -11,7 +11,7 @@
 
 <script>
 import UserForm from '@/components/UserForm.vue'
-import axios from 'axios'
+import UserService from '@/services/UserService'
 
 export default {
   name: 'AddUser',
@@ -20,8 +20,12 @@ export default {
 
   methods : {
     addUser(newUserObject) {
-      axios.post('http://localhost:9000/collaborateur', newUserObject).then( response => {
+      UserService.create(newUserObject).then( res => {
+        alert(res.message)
+
         this.$router.replace({ name : 'list' }) // Redirection vers la page <ListUser>
+      }).catch(err => {
+        alert(err.message)
       })
     }
   }

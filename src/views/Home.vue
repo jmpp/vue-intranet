@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 import UserCard from '@/components/UserCard.vue'
+import UserService from '@/services/UserService'
 
 export default {
   name : 'Home',
@@ -47,18 +47,20 @@ export default {
     },
 
     removeUser(user) {
-      axios.delete('http://localhost:9000/collaborateur/' + user.id).then(response => {
+      UserService.remove(user).then(res => {
         this.users = this.users.filter(u => u.id !== user.id); // Suppression de l'utilisateur dans le tableau 'this.users'
-
         this.getRandomUser();
-      })
+
+        alert(res.message)
+      }).catch(err => {
+        alert(err.message);
+      });
     }
   },
 
   created() {
-    // A la création de <Home> , on lance une requête Ajax vers le serveur, grâce à la librairie `axios`
-    axios.get('http://localhost:9000/collaborateurs').then( response => {
-      this.users = response.data; // Lorsqu'on obtient la réponse JSON du serveur, on remplit notre tableau `users` défini dans les data
+    UserService.fetchAll().then( collaborateurs => {
+      this.users = collaborateurs;
       this.getRandomUser(); // Prend un utilisateur au hasard dans le tableau `users`
     })
   }

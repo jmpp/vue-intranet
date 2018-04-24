@@ -12,7 +12,7 @@
 
 <script>
 import UserForm from '@/components/UserForm'
-import axios from 'axios'
+import UserService from '@/services/UserService'
 
 export default {
   name: 'EditUser',
@@ -27,16 +27,23 @@ export default {
 
   methods : {
     editUser(userObjectModified) {
-      axios.put('http://localhost:9000/collaborateur/' + userObjectModified.id, userObjectModified)
-        .then( response => {
+      UserService.update(userObjectModified)
+        .then( res => {
+          alert(res.message)
+
           this.$router.replace({ name : 'list' }) // Redirection vers la liste <ListUser>
+        }).catch(err => {
+          alert(err.message)
         })
     }
   },
 
   created() {
-    axios.get('http://localhost:9000/collaborateur/' + this.$route.params.id).then(response => {
-      this.user = response.data
+    UserService.fetchOne(this.$route.params.id).then(user => {
+      this.user = user
+    }).catch(err => {
+      alert(err.message)
+      this.$router.replace({ name : 'home' })
     })
   }
 }
